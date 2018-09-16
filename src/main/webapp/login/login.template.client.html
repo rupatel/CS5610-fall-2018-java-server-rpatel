@@ -18,38 +18,61 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
             integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
             crossorigin="anonymous"></script>
+
+    <!--https://fontawesome.com/how-to-use/on-the-web/setup/getting-started?using=web-fonts-with-css-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+          integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+          crossorigin="anonymous">
 </head>
 <body>
-<div class="container">
-    <h1>Sign In</h1>
-    <form>
-        <div class="form-group row">
-            <label for="username" class="col-sm-2 col-form-label">
-                Username </label>
-            <div class="col-sm-10">
-                <input class="form-control" id="username" placeholder="Alice">
+    <div class="container">
+        <h1>
+            Sign In
+            <i class="fas fa-chalkboard-teacher"></i>
+        </h1>
+        <form class="p-2">
+            <div class="form-group row">
+                <label for="username" class="col-sm-2 col-form-label">
+                    Username </label>
+                <div class="col-sm-10">
+                    <input class="form-control" id="username" placeholder="Alice">
+                </div>
             </div>
-        </div>
-        <div class="form-group row">
-            <label for="password" class="col-sm-2 col-form-label">
-                Password </label>
-            <div class="col-sm-10">
-                <input type="password" class="form-control"
-                       id="password" placeholder="123qwe#$%">
+            <div class="form-group row">
+                <label for="password" class="col-sm-2 col-form-label">
+                    Password </label>
+                <div class="col-sm-10">
+                    <input type="password" class="form-control"
+                           id="password" placeholder="123qwe#$%">
+                </div>
             </div>
-        </div>
-        <div class="form-group row">
-            <label class="col-sm-2 col-form-label"></label>
-            <div class="col-sm-10">
-                <button class="btn btn-primary btn-block">Sign in</button>
-                <div class="row">
-                    <div class="col-12">
-                        <a href="#" class="float-right">Sign up</a>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10">
+                    <button class="btn btn-primary btn-block">
+                        Sign in
+                        <i class="fas fa-sign-in-alt"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10">
+                    <button class="btn btn-primary btn-block">
+                        Cancel
+                        <i class="fas fa-home"></i>
+                    </button>
+                    <div class="row">
+                        <div class="col-12">
+                            <a href="#" class="float-right">
+                                Sign up
+                                <i class="fas fa-user-plus"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </form>
-</div>
+        </form>
+    </div>
 </body>
 </html>
