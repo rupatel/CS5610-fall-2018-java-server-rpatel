@@ -31,3 +31,9 @@ a.no-decorate:hover{
 .course-listing-header{
     border-color:#d6d0d0 !important;
 }
+
+.bottom-right{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
