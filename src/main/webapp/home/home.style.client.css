@@ -1,0 +1,33 @@
+.circle{
+    color:red;
+}
+.plus{
+    color:white;
+}
+a > .fas {
+    display: inline;
+}
+a .fa-stack{
+    height: 1em;
+    width: 1em;
+    line-height:1em;
+}
+.course-listing {
+    background: #FFFFFF;
+}
+body {
+    background: #e6e6e6;
+}
+
+a.no-decorate{
+    text-decoration:none;
+    color: black;
+}
+
+a.no-decorate:hover{
+    text-decoration: none;
+}
+
+.course-listing-header{
+    border-color:#d6d0d0 !important;
+}
