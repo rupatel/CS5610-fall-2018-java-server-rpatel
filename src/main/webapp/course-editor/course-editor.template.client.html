@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Course Editor</title>
+    <!--https://getbootstrap.com/docs/4.1/getting-started/introduction/-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="course-editor.style.client.css">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<!--https://getbootstrap.com/docs/4.1/components/navs/#pills-->
+    <div class="container">
+        <div class="row">
+            <div class="col-2">
+                <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                    <a class="nav-link active" id="v-pills-module1-tab" data-toggle="pill"
+                       href="#v-pills-module1" role="tab" aria-controls="v-pills-module1"
+                       aria-selected="true">Module1-JQuery</a>
+                    <a class="nav-link" id="v-pills-module2-tab" data-toggle="pill"
+                       href="#v-pills-module2" role="tab" aria-controls="v-pills-module2"
+                       aria-selected="false">Module2-React</a>
+                    <a class="nav-link" id="v-pills-module3-tab" data-toggle="pill"
+                       href="#v-pills-module3" role="tab" aria-controls="v-pills-module3"
+                       aria-selected="false">Module3-Redux</a>
+                    <a class="nav-link" id="v-pills-module4-tab" data-toggle="pill"
+                       href="#v-pills-module4" role="tab" aria-controls="v-pills-module4"
+                       aria-selected="false">Module4-Native</a>
+                    <a class="nav-link" id="v-pills-module5-tab" data-toggle="pill"
+                       href="#v-pills-module5" role="tab" aria-controls="v-pills-module5"
+                       aria-selected="false">Module5-Angular</a>
+                    <a class="nav-link" id="v-pills-module6-tab" data-toggle="pill"
+                       href="#v-pills-module6" role="tab" aria-controls="v-pills-module6"
+                       aria-selected="false">Module6-Node</a>
+                    <a class="nav-link" id="v-pills-module7-tab" data-toggle="pill"
+                       href="#v-pills-module7" role="tab" aria-controls="v-pills-module7"
+                       aria-selected="false">Module7-Mongo</a>
+                </div>
+            </div>
+
+            <div class="col-10">
+                <div class="tab-content" id="v-pills-tabContent">
+                    <div class="tab-pane fade show active" id="v-pills-module1" role="tabpanel"
+                         aria-labelledby="v-pills-module1-tab">
+                        <ul class="nav nav-pills mb-3" id="pills-tab1" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="module1-topic1" data-toggle="pill"
+                                   href="#pills-module1-topic1" role="tab"
+                                   aria-controls="pills-module1-topic1" aria-selected="true">JQuery Topic1</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="module1-topic2" data-toggle="pill"
+                                   href="#pills-module1-topic2" role="tab"
+                                   aria-controls="pills-module1-topic2" aria-selected="false">JQuery Topic2</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="module1-topic3" data-toggle="pill"
+                                   href="#pills-module1-topic3" role="tab"
+                                   aria-controls="pills-module1-topic3" aria-selected="false">JQuery Topic3</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="module1-topic4" data-toggle="pill"
+                                   href="#pills-module1-topic4" role="tab"
+                                   aria-controls="pills-module1-topic4" aria-selected="false">JQuery Topic4</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="pills-tabContent1">
+                            <div class="tab-pane fade show active" id="pills-module1-topic1" role="tabpanel"
+                                 aria-labelledby="module1-topic1">
+                                JQuery Topic 1 Content
+                            </div>
+                            <div class="tab-pane fade show" id="pills-module1-topic2" role="tabpanel"
+                                 aria-labelledby="module1-topic2">
+                                JQuery Topic 2 Content
+                            </div>
+                            <div class="tab-pane fade show" id="pills-module1-topic3" role="tabpanel"
+                                 aria-labelledby="module1-topic3">
+                                JQuery Topic 3 Content
+                            </div>
+                            <div class="tab-pane fade show" id="pills-module1-topic4" role="tabpanel"
+                                 aria-labelledby="module1-topic4">
+                                JQuery Topic 4 Content
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="v-pills-module2" role="tabpanel"
+                         aria-labelledby="v-pills-module2-tab">
+                        <ul class="nav nav-pills mb-3" id="pills-tab2" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="module2-topic1" data-toggle="pill"
+                                   href="#pills-module2-topic1" role="tab"
+                                   aria-controls="pills-module2-topic1" aria-selected="true">JQuery Topic1</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="module2-topic2" data-toggle="pill"
+                                   href="#pills-module2-topic2" role="tab"
+                                   aria-controls="pills-module2-topic2" aria-selected="false">JQuery Topic2</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="module2-topic3" data-toggle="pill"
+                                   href="#pills-module2-topic3" role="tab"
+                                   aria-controls="pills-module2-topic3" aria-selected="false">JQuery Topic3</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="module2-topic4" data-toggle="pill"
+                                   href="#pills-module2-topic4" role="tab"
+                                   aria-controls="pills-module1-topic4" aria-selected="false">JQuery Topic4</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="pills-tabContent2">
+                            <div class="tab-pane fade show active" id="pills-module2-topic1" role="tabpanel"
+                                 aria-labelledby="module2-topic1">
+                                React Topic 1 Content
+                            </div>
+                            <div class="tab-pane fade show" id="pills-module2-topic2" role="tabpanel"
+                                 aria-labelledby="module2-topic2">
+                                React Topic 2 Content
+                            </div>
+                            <div class="tab-pane fade show" id="pills-module2-topic3" role="tabpanel"
+                                 aria-labelledby="module2-topic3">
+                                React Topic 3 Content
+                            </div>
+                            <div class="tab-pane fade show" id="pills-module2-topic4" role="tabpanel"
+                                 aria-labelledby="module2-topic4">
+                                React Topic 4 Content
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="v-pills-module3" role="tabpanel"
+                         aria-labelledby="v-pills-module3-tab">
+                        <ul class="nav nav-pills mb-3" id="pills-tab3" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="module3-topic1" data-toggle="pill"
+                                   href="#pills-module3-topic1" role="tab"
+                                   aria-controls="pills-module3-topic1" aria-selected="true">Redux Topic1</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="module3-topic2" data-toggle="pill"
+                                   href="#pills-module3-topic2" role="tab"
+                                   aria-controls="pills-module3-topic2" aria-selected="false">Redux Topic2</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="pills-tabContent3">
+                            <div class="tab-pane fade show active" id="pills-module3-topic1" role="tabpanel"
+                                 aria-labelledby="module3-topic1">
+                                Redux Topic 1 Content
+                            </div>
+                            <div class="tab-pane fade show" id="pills-module3-topic2" role="tabpanel"
+                                 aria-labelledby="module3-topic2">
+                                Redux Topic 2 Content
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="v-pills-module4" role="tabpanel"
+                         aria-labelledby="v-pills-module4-tab">
+                        <ul class="nav nav-pills mb-3" id="pills-tab4" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="module4-topic1" data-toggle="pill"
+                                   href="#pills-module4-topic1" role="tab"
+                                   aria-controls="pills-module4-topic1" aria-selected="true">Redux Topic1</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="pills-tabContent4">
+                            <div class="tab-pane fade show active" id="pills-module4-topic1" role="tabpanel"
+                                 aria-labelledby="module4-topic1">
+                                Native Topic 1 Content
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="v-pills-module5" role="tabpanel"
+                         aria-labelledby="v-pills-module5-tab">
+                        <ul class="nav nav-pills mb-3" id="pills-tab5" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="module5-topic1" data-toggle="pill"
+                                   href="#pills-module5-topic1" role="tab"
+                                   aria-controls="pills-module5-topic1" aria-selected="true">Redux Topic1</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="pills-tabContent5">
+                            <div class="tab-pane fade show active" id="pills-module5-topic1" role="tabpanel"
+                                 aria-labelledby="module5-topic1">
+                                Angular Topic 1 Content
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="v-pills-module6" role="tabpanel"
+                         aria-labelledby="v-pills-module6-tab">
+                        <ul class="nav nav-pills mb-3" id="pills-tab6" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="module6-topic1" data-toggle="pill"
+                                   href="#pills-module6-topic1" role="tab"
+                                   aria-controls="pills-module5-topic1" aria-selected="true">Redux Topic1</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="pills-tabContent6">
+                            <div class="tab-pane fade show active" id="pills-module6-topic1" role="tabpanel"
+                                 aria-labelledby="module6-topic1">
+                                Node Topic 1 Content
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="v-pills-module7" role="tabpanel"
+                         aria-labelledby="v-pills-module7-tab">
+                        <ul class="nav nav-pills mb-3" id="pills-tab7" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="module7-topic1" data-toggle="pill"
+                                   href="#pills-module7-topic1" role="tab"
+                                   aria-controls="pills-module5-topic1" aria-selected="true">Redux Topic1</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="pills-tabContent7">
+                            <div class="tab-pane fade show active" id="pills-module7-topic1" role="tabpanel"
+                                 aria-labelledby="module7-topic1">
+                                Mongo Topic 1 Content
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
