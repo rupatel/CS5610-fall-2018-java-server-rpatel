@@ -30,7 +30,7 @@
             Sign In
             <i class="fas fa-chalkboard-teacher"></i>
         </h1>
-        <form class="p-2">
+        <form class="p-2" action="/profile/profile.template.client.html">
             <div class="form-group row">
                 <label for="username" class="col-sm-2 col-form-label">
                     Username </label>
@@ -49,7 +49,7 @@
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label"></label>
                 <div class="col-sm-10">
-                    <button class="btn btn-primary btn-block">
+                    <button type="submit" class="btn btn-primary btn-block">
                         Sign in
                         <i class="fas fa-sign-in-alt"></i>
                     </button>
@@ -58,15 +58,16 @@
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label"></label>
                 <div class="col-sm-10">
-                    <button class="btn btn-primary btn-block">
+                    <button type="button" class="btn btn-primary btn-block"
+                    onclick="window.location.href='/home/home.template.client.html'">
                         Cancel
                         <i class="fas fa-home"></i>
                     </button>
                     <div class="row">
                         <div class="col-12">
-                            <a href="#" class="float-right">
+                            <a href="/register/register.template.client.html" class="float-right" style="text-decoration: none">
                                 Sign up
-                                <i class="fas fa-user-plus"></i>
+                                <i class="fas fa-user-plus ml-1"></i>
                             </a>
                         </div>
                     </div>
