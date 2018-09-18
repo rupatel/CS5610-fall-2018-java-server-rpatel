@@ -1,7 +1,7 @@
 .modules{
     background:#4e4747;
     height: 90vh;
-    position:absolute;
+    position:fixed;
 }
 
 .lessons{
@@ -35,4 +35,14 @@
 .topics .nav-pills .nav-link.active{
     background: #4a4d50;
     color:white;
+}
+
+.arrow{
+    color:black;
+}
+
+.bottom-right{
+    position: fixed;
+    bottom: 0;
+    right: 0;
 }
