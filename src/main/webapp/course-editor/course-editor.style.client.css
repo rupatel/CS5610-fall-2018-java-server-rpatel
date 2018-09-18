@@ -1,0 +1,38 @@
+.modules{
+    background:#4e4747;
+    height: 90vh;
+    position:absolute;
+}
+
+.lessons{
+    background:#4e4747;
+    height: 10vh;
+}
+
+.action-icon{
+    color:white;
+}
+
+.navLessons .nav-tabs .nav-link.active{
+    color: white;
+    background-color: #524949;
+    border-color: transparent;
+}
+.navLessons .nav-tabs a{
+    color: #b1bbc5;
+}
+
+.modules .nav-link{
+    background: #655858;
+    color:white;
+}
+
+.topics .nav-link{
+    background: #655858;
+    color:white;
+}
+
+.topics .nav-pills .nav-link.active{
+    background: #4a4d50;
+    color:white;
+}
