@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin template</title>
+    <!--https://getbootstrap.com/docs/4.1/getting-started/introduction/-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <!--https://fontawesome.com/how-to-use/on-the-web/setup/getting-started?using=web-fonts-with-css-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+          integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+          crossorigin="anonymous">
+
+    <link href="user-admin.style.client.css" rel="stylesheet" />
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+            crossorigin="anonymous"></script>
+
+    <script src="../services/user.service.client.js"></script>
+    <script src="user-admin.component.client.js"></script>
+
+</head>
+<body>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Password</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Role</th>
+                <th>&nbsp;</th>
+            </tr>
+
+            <tr class="wbdv-form">
+                <td>
+                    <input id="usernameFld" class="form-control"
+                           placeholder="Username" />
+                </td>
+                <td>
+                    <input id="passwordFld" class="form-control"
+                           placeholder="Password" />
+                </td>
+                <td>
+                    <input id="firstNameFld" class="form-control"
+                           placeholder="First Name" />
+                </td>
+                <td>
+                    <input id="lastNameFld" class="form-control"
+                           placeholder="Last Name" />
+                </td>
+                <td>
+                    <select id="roleFld" class="form-control">
+                        <option value="FACULTY">Faculty</option>
+                        <option value="STUDENT">Student</option>
+                        <option value="ADMIN">Admin</option>
+                    </select>
+                </td>
+                <td>
+                    <span class="float-right" style="white-space: nowrap">
+                        <i class="fa-2x fa fa-search wbdv-search"></i>
+                        <i class="fa-2x fa fa-plus wbdv-create"></i>
+                        <i class="fa-2x fa fa-check wbdv-update"></i>
+                    </span>
+                </td>
+            </tr>
+        </thead>
+        <tbody class="wbdv-tbody">
+        <tr class="wbdv-template wbdv-user wbdv-hidden">
+            <td class="wbdv-username">ada</td>
+            <td>&nbsp;</td>
+            <td class="wbdv-first-name">Ada</td>
+            <td class="wbdv-last-name">Lovelace</td>
+            <td class="wbdv-role">FACULTY</td>
+            <td class="wbdv-actions">
+            <span class="float-right">
+              <i id="wbdv-remove" class="fa-2x fa fa-times wbdv-remove"></i>
+              <i id="wbdv-edit" class="fa-2x fa fa-pencil wbdv-edit"></i>
+            </span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</body>
+</html>
