@@ -17,8 +17,9 @@
         $userRowTemplate = $(".wbdv-tbody .wbdv-template");
         $tbody = $("tbody");
         $roleFld = $("#roleFld");
-        $createBtn.click(createUser)
-        renderUsers(userService.findAllUsers())
+        $createBtn.click(createUser);
+        $removeBtn.click(deleteUser);
+        renderUsers(userService.findAllUsers());
     }
     function createUser() {
         var u = {
@@ -28,7 +29,7 @@
             role:$roleFld.val(),
             password:$passwordFld.val()
         }
-        var userRow = $userRowTemplate.clone().removeClass("wbdv-hidden");
+        var userRow = $userRowTemplate.clone(true,true).removeClass("wbdv-hidden");
         console.log(u);
         userRow
             .find(".wbdv-username")
@@ -50,13 +51,18 @@
     function findUserById(id) {
         return
     }
-    function deleteUser() {  }
+    function deleteUser(e) {
+        var row = $(e.currentTarget).parents(".wbdv-template");
+        row.remove();
+    }
     function selectUser() {  }
     function updateUser() {  }
     function renderUser(user) { }
     function renderUsers(users) {
         for(i in users){
-            var userRow = $userRowTemplate.clone().removeClass("wbdv-hidden");
+            var userRow = $userRowTemplate.clone(true,true)
+                .removeClass("wbdv-hidden")
+                .attr("id",i);
             userRow
                 .find(".wbdv-username")
                 .html(users[i].username);
