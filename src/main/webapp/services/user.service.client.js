@@ -4,7 +4,7 @@ function AdminUserServiceClient() {
     this.findUserById = findUserById;
     this.deleteUser = deleteUser;
     this.updateUser = updateUser;
-    this.url = 'http://localhost:8080';
+    this.url = 'https://cs5610-fall-2018-java-server.herokuapp.com';
     var self = this;
 
     //will fire http post
