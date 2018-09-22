@@ -14,6 +14,7 @@ function AdminUserServiceClient() {
             {
                 method: 'GET',
                 headers: {
+                    'Access-Control-Allow-Origin':'*',
                     'Content-Type': 'application/json'
                 }
             }
@@ -27,6 +28,7 @@ function AdminUserServiceClient() {
             {
                 method: 'GET',
                 headers: {
+                    'Access-Control-Allow-Origin':'*',
                     'Content-Type': 'application/json'
                 }
             }
@@ -40,6 +42,7 @@ function AdminUserServiceClient() {
             {
                 method: 'GET',
                 headers: {
+                    'Access-Control-Allow-Origin':'*',
                     'Content-Type': 'application/json'
                 }
             }
@@ -54,6 +57,7 @@ function AdminUserServiceClient() {
             {
                 method: 'GET',
                 headers: {
+                    'Access-Control-Allow-Origin':'*',
                     'Content-Type': 'application/json'
                 }
             }
@@ -67,6 +71,7 @@ function AdminUserServiceClient() {
             {
                 method: 'GET',
                 headers: {
+                    'Access-Control-Allow-Origin':'*',
                     'Content-Type': 'application/json'
                 }
             }
