@@ -47,8 +47,9 @@
         userService.createUser(u).then(u => {
             renderUser(u);
             $tbody.children().toArray().map(tr => $(tr)).map(
-                tr => tr.show()
-            )
+                tr =>  {
+                    if(!$tr.attr("class").includes("wbdv-hidden")) tr.show()
+                });
             clearFields();
         });
     }
