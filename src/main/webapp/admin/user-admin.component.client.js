@@ -4,6 +4,7 @@
     var $firstNameFld, $lastNameFld;
     var $userRowTemplate, $tbody;
     var userService = new AdminUserServiceClient();
+    var $selectedUserRow;
     $(main);
 
     function main() {
@@ -11,6 +12,7 @@
         $passwordFld = $("#passwordFld");
         $removeBtn = $("#removeBtn");
         $editBtn = $("#editBtn");
+        $updateBtn = $("#updateBtn");
         $createBtn = $("#createBtn");
         $firstNameFld = $("#firstNameFld");
         $lastNameFld = $("#lastNameFld");
@@ -19,7 +21,17 @@
         $roleFld = $("#roleFld");
         $createBtn.click(createUser);
         $removeBtn.click(deleteUser);
-        renderUsers(userService.findAllUsers());
+        $editBtn.click(selectUser);
+        $updateBtn.click(updateUser);
+        findAllUsers().then(users => renderUsers(users))
+    }
+
+    function clearFields(){
+        $usernameFld.val('');
+        $firstNameFld.val('');
+        $lastNameFld.val('');
+        $roleFld.find('option').first().attr("selected",true);
+        $passwordFld.val('');
     }
     function createUser() {
         var u = {
@@ -29,8 +41,55 @@
             role:$roleFld.val(),
             password:$passwordFld.val()
         }
+        userService.createUser(u).then(u => {
+           renderUser(u);
+           clearFields();
+        });
+    }
+
+    function findAllUsers() {
+        return userService.findAllUsers().then(
+            res => res
+        )
+    }
+
+    function findUserById(id) {
+        return
+    }
+
+    function deleteUser(e) {
+        var row = $(e.currentTarget).parents(".wbdv-template");
+        userService.deleteUser(row.id).then(res => {
+            row.remove();
+        })
+    }
+
+    function selectUser(e) {
+        var userRow = $(e.currentTarget).parents(".wbdv-template");
+        $usernameFld.val(userRow.find(".wbdv-username").html());
+        $firstNameFld.val(userRow.find(".wbdv-first-name").html());
+        $lastNameFld.val(userRow.find(".wbdv-last-name").html());
+        $roleFld.val(userRow.find(".wbdv-role").html());
+        $selectedUserRow = userRow
+    }
+
+    function updateUser(e) {
+        if(!$selectedUserRow) return;
+        userService.updateUser($selectedUserRow.attr("id")).then(
+            res => {
+                $selectedUserRow.find(".wbdv-username").html($usernameFld.val());
+                $selectedUserRow.find(".wbdv-first-name").html($firstNameFld.val());
+                $selectedUserRow.find(".wbdv-last-name").html($lastNameFld.val());
+                $selectedUserRow.find(".wbdv-role").html($roleFld.val());
+                $selectedUserRow = null;
+                clearFields();
+            }
+        )
+    }
+
+    function renderUser(u) {
         var userRow = $userRowTemplate.clone(true,true).removeClass("wbdv-hidden");
-        console.log(u);
+        userRow.attr("id",u.username);
         userRow
             .find(".wbdv-username")
             .html(u.username);
@@ -45,37 +104,10 @@
             .html(u.role);
         $tbody.append(userRow);
     }
-    function findAllUsers() {
 
-    }
-    function findUserById(id) {
-        return
-    }
-    function deleteUser(e) {
-        var row = $(e.currentTarget).parents(".wbdv-template");
-        row.remove();
-    }
-    function selectUser() {  }
-    function updateUser() {  }
-    function renderUser(user) { }
     function renderUsers(users) {
         for(i in users){
-            var userRow = $userRowTemplate.clone(true,true)
-                .removeClass("wbdv-hidden")
-                .attr("id",i);
-            userRow
-                .find(".wbdv-username")
-                .html(users[i].username);
-            userRow
-                .find(".wbdv-first-name")
-                .html(users[i].firstName);
-            userRow
-                .find(".wbdv-last-name")
-                .html(users[i].lastName);
-            userRow
-                .find(".wbdv-role")
-                .html(users[i].role);
-            $tbody.append(userRow);
+            renderUser(users[i]);
         }
     }
 })();
