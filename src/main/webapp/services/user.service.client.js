@@ -21,7 +21,7 @@ function AdminUserServiceClient() {
     }
 
     //will fire http get
-    function findAllUsers(callback) {
+    function findAllUsers() {
         return fetch(
             this.url + '/admin' +  '/data' + '/findAllUsers.json',
             {
