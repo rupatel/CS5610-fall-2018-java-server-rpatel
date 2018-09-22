@@ -46,6 +46,9 @@
         }
         userService.createUser(u).then(u => {
             renderUser(u);
+            $tbody.children().toArray().map(tr => $(tr)).map(
+                tr => tr.show()
+            )
             clearFields();
         });
     }
