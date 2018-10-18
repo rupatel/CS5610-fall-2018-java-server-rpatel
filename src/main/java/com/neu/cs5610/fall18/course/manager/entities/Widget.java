@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.ManyToOne;
 
 @Entity
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
@@ -14,9 +15,11 @@ import javax.persistence.InheritanceType;
 public class Widget {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	long id;
-	String name;
-	int index;
+	private long id;
+	private String name;
+	private int index;
+	@ManyToOne
+	private Topic topicId;
 	public long getId() {
 		return id;
 	}
@@ -34,5 +37,11 @@ public class Widget {
 	}
 	public void setIndex(int index) {
 		this.index = index;
+	}
+	public Topic getTopicId() {
+		return topicId;
+	}
+	public void setTopicId(Topic topicId) {
+		this.topicId = topicId;
 	}
 }

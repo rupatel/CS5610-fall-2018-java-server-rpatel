@@ -4,8 +4,8 @@ import javax.persistence.Entity;
 
 @Entity
 public class LinkeWidget extends Widget{
-	String href;
-	String title;
+	private String href;
+	private String title;
 	public String getHref() {
 		return href;
 	}

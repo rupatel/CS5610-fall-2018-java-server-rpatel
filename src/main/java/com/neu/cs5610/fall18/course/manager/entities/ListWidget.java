@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 
 @Entity
 public class ListWidget extends Widget{
-	String[] items;
+	private String[] items;
 	boolean isOrdered;
 	public String[] getItems() {
 		return items;

@@ -4,8 +4,8 @@ import javax.persistence.Entity;
 
 @Entity
 public class HeadingWidget extends Widget{
-	int size;
-	String text;
+	private int size;
+	private String text;
 	public int getSize() {
 		return size;
 	}

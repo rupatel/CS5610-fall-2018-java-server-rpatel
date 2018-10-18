@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 
 @Entity
 public class ParagraphWidget extends Widget{
-	String text;
+	private String text;
 	public String getText() {
 		return text;
 	}

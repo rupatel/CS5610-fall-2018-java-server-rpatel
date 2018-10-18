@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 
 @Entity
 public class ImageWidget extends Widget{
-	String src;
+	private String src;
 	public String getSrc() {
 		return src;
 	}
