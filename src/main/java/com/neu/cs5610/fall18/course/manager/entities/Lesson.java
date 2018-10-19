@@ -2,6 +2,7 @@ package com.neu.cs5610.fall18.course.manager.entities;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,7 +16,7 @@ public class Lesson {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
 	String title;
-	@OneToMany(mappedBy="lesson")
+	@OneToMany(mappedBy="lesson",cascade=CascadeType.ALL,orphanRemoval = true)
 	private Set<Topic> topics;
 	@ManyToOne
 	private Module module;

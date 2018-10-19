@@ -2,6 +2,7 @@ package com.neu.cs5610.fall18.course.manager.entities;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,10 +21,10 @@ public class Course {
 	@ManyToOne
 	private Faculty faculty;
 	
-	@OneToMany(mappedBy="course")
+	@OneToMany(mappedBy="course",cascade=CascadeType.ALL,orphanRemoval = true)
 	private Set<Section> sections;
 	
-	@OneToMany(mappedBy="course")
+	@OneToMany(mappedBy="course",cascade=CascadeType.ALL,orphanRemoval = true)
 	private Set<Module> modules;
 	
 	public Set<Section> getSections() {
