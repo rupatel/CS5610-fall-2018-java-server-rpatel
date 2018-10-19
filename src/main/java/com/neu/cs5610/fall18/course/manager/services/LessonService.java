@@ -16,12 +16,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.neu.cs5610.fall18.course.manager.entities.Course;
 import com.neu.cs5610.fall18.course.manager.entities.Lesson;
 import com.neu.cs5610.fall18.course.manager.entities.Module;
 import com.neu.cs5610.fall18.course.manager.entities.Topic;
 import com.neu.cs5610.fall18.course.manager.repositories.LessonRepository;
-import com.neu.cs5610.fall18.course.manager.repositories.ModuleRepository;
 
 @Service
 @RestController
@@ -43,7 +41,7 @@ public class LessonService {
 	}
 	
 	@GetMapping("/api/module/{mid}/lesson")
-	public List<Lesson> findAllModule(@PathVariable("mid") Long mid){
+	public List<Lesson> findAllLesson(@PathVariable("mid") Long mid){
 		Module c = moduleService.findModuleById(mid);
 		return new ArrayList(c.getLessons());
 	}
@@ -58,7 +56,7 @@ public class LessonService {
 	}
 	
 	@PutMapping("/api/lesson/{lessonId}")
-	public Lesson updateCourse(@PathVariable("lessonId") Long lessonId, @RequestBody Lesson lesson) {
+	public Lesson updateLesson(@PathVariable("lessonId") Long lessonId, @RequestBody Lesson lesson) {
 		Optional<Lesson> opt = lessonRepo.findById(lessonId);
 		if(opt.isPresent())
 		{
@@ -75,7 +73,7 @@ public class LessonService {
 	}
 	
 	@DeleteMapping("/api/lesson/{lessonId}")
-	public void deleteCourse(@PathVariable("lessonId") Long lessonId) {
+	public void deleteLesson(@PathVariable("lessonId") Long lessonId) {
 		if(lessonRepo.existsById(lessonId))
 			lessonRepo.deleteById(lessonId);
 	}
