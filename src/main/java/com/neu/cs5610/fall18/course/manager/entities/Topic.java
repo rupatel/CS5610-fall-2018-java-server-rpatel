@@ -15,7 +15,7 @@ public class Topic {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
 	String title;
-	@OneToMany(mappedBy="id")
+	@OneToMany(mappedBy="topic")
 	private Set<Widget> widgets;
 	@ManyToOne
 	private Lesson lesson;

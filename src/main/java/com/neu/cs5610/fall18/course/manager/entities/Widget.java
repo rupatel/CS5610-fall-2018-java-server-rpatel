@@ -19,7 +19,7 @@ public class Widget {
 	private String name;
 	private int index;
 	@ManyToOne
-	private Topic topicId;
+	private Topic topic;
 	public long getId() {
 		return id;
 	}
@@ -38,10 +38,10 @@ public class Widget {
 	public void setIndex(int index) {
 		this.index = index;
 	}
-	public Topic getTopicId() {
-		return topicId;
+	public Topic getTopic() {
+		return topic;
 	}
-	public void setTopicId(Topic topicId) {
-		this.topicId = topicId;
+	public void setTopic(Topic topic) {
+		this.topic = topic;
 	}
 }

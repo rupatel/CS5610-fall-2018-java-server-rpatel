@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -14,8 +16,22 @@ public class Course {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
 	private String title;
-	@OneToMany(mappedBy="id")
+	
+	@ManyToOne
+	private Faculty faculty;
+	
+	@OneToMany(mappedBy="course")
+	private Set<Section> sections;
+	
+	@OneToMany(mappedBy="course")
 	private Set<Module> modules;
+	
+	public Set<Section> getSections() {
+		return sections;
+	}
+	public void setSections(Set<Section> sections) {
+		this.sections = sections;
+	}
 	public long getId() {
 		return id;
 	}
@@ -27,6 +43,12 @@ public class Course {
 	}
 	public void setTitle(String title) {
 		this.title = title;
+	}
+	public Faculty getFaculty() {
+		return faculty;
+	}
+	public void setFaculty(Faculty faculty) {
+		this.faculty = faculty;
 	}
 	public Set<Module> getModules() {
 		return modules;
