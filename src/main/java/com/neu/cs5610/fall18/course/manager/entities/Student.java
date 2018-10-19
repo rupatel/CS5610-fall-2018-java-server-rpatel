@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Student extends Person{
+public class Student extends User{
 	@OneToMany(mappedBy="student")
 	private Set<Enrollment> enrollments;
 
