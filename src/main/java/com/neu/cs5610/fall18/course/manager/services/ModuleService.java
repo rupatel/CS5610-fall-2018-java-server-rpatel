@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,11 +17,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.neu.cs5610.fall18.course.manager.entities.Course;
-import com.neu.cs5610.fall18.course.manager.entities.Faculty;
 import com.neu.cs5610.fall18.course.manager.entities.Lesson;
 import com.neu.cs5610.fall18.course.manager.entities.Module;
-import com.neu.cs5610.fall18.course.manager.entities.Section;
-import com.neu.cs5610.fall18.course.manager.repositories.CourseRepository;
 import com.neu.cs5610.fall18.course.manager.repositories.ModuleRepository;
 
 @Service
@@ -46,7 +41,7 @@ public class ModuleService {
 	}
 	
 	@GetMapping("/api/course/{ci}/module")
-	public List<Course> findAllModule(@PathVariable("cid") Long cid){
+	public List<Module> findAllModule(@PathVariable("cid") Long cid){
 		Course c = courseService.findCourseById(cid);
 		return new ArrayList(c.getModules());
 	}
@@ -61,7 +56,7 @@ public class ModuleService {
 	}
 	
 	@PutMapping("/api/module/{moduleId}")
-	public Module updateCourse(@PathVariable("moduleId") Long moduleId, @RequestBody Module module) {
+	public Module updateModule(@PathVariable("moduleId") Long moduleId, @RequestBody Module module) {
 		Optional<Module> opt = moduleRepo.findById(moduleId);
 		if(opt.isPresent())
 		{
@@ -78,7 +73,7 @@ public class ModuleService {
 	}
 	
 	@DeleteMapping("/api/module/{moduleId}")
-	public void deleteCourse(@PathVariable("moduleId") Long moduleId) {
+	public void deleteModule(@PathVariable("moduleId") Long moduleId) {
 		if(moduleRepo.existsById(moduleId))
 			moduleRepo.deleteById(moduleId);
 	}
