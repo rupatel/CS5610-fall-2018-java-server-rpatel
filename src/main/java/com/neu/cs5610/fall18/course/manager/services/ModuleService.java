@@ -72,8 +72,7 @@ public class ModuleService {
 		{
 			Module old = opt.get();
 			module.setId(old.getId());
-			module.setLessons(old.getLessons());
-		
+			
 			Set<Module> modules = old.getCourse().getModules().stream().map(m -> {
 				return (m.getId().equals(moduleId) ? module : m);
 			}).collect(Collectors.toSet());
@@ -82,6 +81,7 @@ public class ModuleService {
 			old.getCourse().getModules().addAll(modules);
 			module.setCourse(old.getCourse());
 			
+			module.setLessons(old.getLessons());
 			courseRepo.save(module.getCourse());
 			
 			return findModuleById(module.getId());
