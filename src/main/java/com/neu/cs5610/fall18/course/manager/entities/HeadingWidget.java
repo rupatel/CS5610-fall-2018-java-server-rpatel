@@ -1,15 +1,17 @@
 package com.neu.cs5610.fall18.course.manager.entities;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 @Entity
+@DiscriminatorValue("HEADING")
 public class HeadingWidget extends Widget{
-	private int size;
+	private Integer size;
 	private String text;
-	public int getSize() {
+	public Integer getSize() {
 		return size;
 	}
-	public void setSize(int size) {
+	public void setSize(Integer size) {
 		this.size = size;
 	}
 	public String getText() {

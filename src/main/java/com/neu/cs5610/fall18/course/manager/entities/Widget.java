@@ -9,21 +9,40 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
+
 @Entity
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="type")
-public class Widget {
+
+@JsonTypeInfo(
+use=com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+include=As.PROPERTY, property="type"
+)
+@JsonSubTypes({
+	@Type(name="HEADING",value=HeadingWidget.class),
+	@Type(name="PARAGRAPH",value=ParagraphWidget.class),
+	@Type(name="LIST",value=ListWidget.class),
+	@Type(name="IMAGE",value=ImageWidget.class),
+	@Type(name="LINK",value=LinkWidget.class),
+	})
+public abstract class Widget {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private long id;
+	private Long id;
 	private String name;
 	private int index;
 	@ManyToOne
+	@JsonIgnore
 	private Topic topic;
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getName() {

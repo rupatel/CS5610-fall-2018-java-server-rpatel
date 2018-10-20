@@ -31,7 +31,13 @@ public class CourseService {
 	
 	@PostMapping("/api/course")
 	public Course createCourse(@RequestBody Course course, HttpSession session) {
-		course.setFaculty((Faculty)session.getAttribute("currentUser"));
+		if(course.getModules() != null)
+		{
+			for(Module m : course.getModules())
+				course.addToModules(m);
+		
+			course.setFaculty((Faculty)session.getAttribute("currentUser"));
+		}
 		return courseRepo.save(course);
 	}
 	

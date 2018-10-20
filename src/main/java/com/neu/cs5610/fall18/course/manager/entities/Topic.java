@@ -10,20 +10,23 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Topic {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private long id;
+	private Long id;
 	String title;
 	@OneToMany(mappedBy="topic",cascade=CascadeType.ALL,orphanRemoval = true)
 	private Set<Widget> widgets;
+	@JsonIgnore
 	@ManyToOne
 	private Lesson lesson;
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getTitle() {
@@ -43,5 +46,9 @@ public class Topic {
 	}
 	public void setLesson(Lesson lesson) {
 		this.lesson = lesson;
+	}
+	public void addToWidgets(Widget w) {
+		w.setTopic(this);
+		this.widgets.add(w);
 	}
 }

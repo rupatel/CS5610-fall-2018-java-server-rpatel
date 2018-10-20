@@ -10,13 +10,16 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Course {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private long id;
+	private Long id;
 	private String title;
 	
+	@JsonIgnore
 	@ManyToOne
 	private Faculty faculty;
 	
@@ -32,10 +35,10 @@ public class Course {
 	public void setSections(Set<Section> sections) {
 		this.sections = sections;
 	}
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getTitle() {
@@ -55,5 +58,18 @@ public class Course {
 	}
 	public void setModules(Set<Module> modules) {
 		this.modules = modules;
+	}
+	public void addToModules(Module m) {
+		m.setCourse(this);
+		for(Lesson l: m.getLessons())
+		{
+			l.setModule(m);
+			m.addToLessons(l);
+		}
+		this.modules.add(m);
+	}
+	public void addToSections(Section s) {
+		s.setCourse(this);
+		this.sections.add(s);
 	}
 }

@@ -1,9 +1,11 @@
 package com.neu.cs5610.fall18.course.manager.entities;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 @Entity
-public class LinkeWidget extends Widget{
+@DiscriminatorValue("LINK")
+public class LinkWidget extends Widget{
 	private String href;
 	private String title;
 	public String getHref() {
