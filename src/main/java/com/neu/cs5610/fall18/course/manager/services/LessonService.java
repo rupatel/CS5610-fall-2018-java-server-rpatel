@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,10 +16,12 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.neu.cs5610.fall18.course.manager.entities.Course;
 import com.neu.cs5610.fall18.course.manager.entities.Lesson;
 import com.neu.cs5610.fall18.course.manager.entities.Module;
 import com.neu.cs5610.fall18.course.manager.entities.Topic;
 import com.neu.cs5610.fall18.course.manager.repositories.LessonRepository;
+import com.neu.cs5610.fall18.course.manager.repositories.ModuleRepository;
 
 @Service
 @RestController
@@ -27,6 +30,8 @@ public class LessonService {
 	private ModuleService moduleService;
 	@Autowired
 	private LessonRepository lessonRepo;
+	@Autowired
+	private ModuleRepository moduleRepo;
 	@PostMapping("/api/module/{moduleId}/lesson")
 	public Lesson createLesson(@PathVariable("moduleId") Long moduleId, 
 								@RequestBody Lesson lesson) {
@@ -45,8 +50,11 @@ public class LessonService {
 	
 	@GetMapping("/api/module/{mid}/lesson")
 	public List<Lesson> findAllLesson(@PathVariable("mid") Long mid){
-		Module c = moduleService.findModuleById(mid);
-		return new ArrayList<Lesson>(c.getLessons());
+		Module m = moduleService.findModuleById(mid);
+		if(m!=null)
+			return new ArrayList<Lesson>(m.getLessons());
+		else 
+			return null;
 	}
 	
 	@GetMapping("/api/lesson/{lessonId}")
@@ -64,13 +72,20 @@ public class LessonService {
 		if(opt.isPresent())
 		{
 			Lesson old = opt.get();
-			Set<Topic> topics = old.getTopics();
-			topics.clear();
-			if(lesson.getTopics() != null)
-				topics.addAll(lesson.getTopics());
 			lesson.setId(old.getId());
-			lesson.setTopics(topics);
-			return lessonRepo.save(lesson);
+			
+			Set<Lesson> lessons = old.getModule().getLessons().stream().map(l -> {
+				return (l.getId().equals(lessonId) ? lesson : l);
+			}).collect(Collectors.toSet());
+			
+			old.getModule().getLessons().clear();
+			old.getModule().getLessons().addAll(lessons);
+			lesson.setModule(old.getModule());
+			
+			lesson.setTopics(old.getTopics());
+			moduleRepo.save(lesson.getModule());
+			
+			return findLessonById(lesson.getId());
 		}
 		else 
 			return null;
