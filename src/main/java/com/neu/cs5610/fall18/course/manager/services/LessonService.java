@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.neu.cs5610.fall18.course.manager.entities.Course;
 import com.neu.cs5610.fall18.course.manager.entities.Lesson;
 import com.neu.cs5610.fall18.course.manager.entities.Module;
 import com.neu.cs5610.fall18.course.manager.entities.Topic;

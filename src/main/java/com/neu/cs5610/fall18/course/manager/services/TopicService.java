@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.neu.cs5610.fall18.course.manager.entities.Lesson;
 import com.neu.cs5610.fall18.course.manager.entities.Topic;
 import com.neu.cs5610.fall18.course.manager.entities.Widget;
+import com.neu.cs5610.fall18.course.manager.repositories.LessonRepository;
 import com.neu.cs5610.fall18.course.manager.repositories.TopicRepository;
 
 @Service
@@ -27,23 +29,31 @@ public class TopicService {
 	@Autowired
 	private LessonService lessonService;
 	private TopicRepository topicRepo;
+	private LessonRepository lessonRepo;
 	@PostMapping(" /api/lesson/{lessonId}/topic")
 	public Topic createTopic(@PathVariable("lessonId") Long lessonId, 
 								@RequestBody Topic topic) {
 			
 		Lesson l = lessonService.findLessonById(lessonId);
-		if(l!=null)
+		if(l==null) return null;
+		if(topic.getWidgets() != null)
 		{
-			topic.setLesson(l);
-			return topicRepo.save(topic); 
+			for(Widget w : topic.getWidgets())
+				topic.addToWidgets(w);
 		}
-		return null;
+		
+		topic.setLesson(l);
+		l.addToTopics(topic);
+		return topicRepo.save(topic);
 	}
 	
 	@GetMapping("/api/lesson/{lessonId}/topic")
 	public List<Topic> findAllTopic(@PathVariable("lessonId") Long lessonId){
 		Lesson l = lessonService.findLessonById(lessonId);
-		return new ArrayList(l.getTopics());
+		if(l != null)
+			return new ArrayList<Topic>(l.getTopics());
+		else 
+			return null;
 	}
 	
 	@GetMapping("/api/topic/{topicId}")
@@ -61,12 +71,20 @@ public class TopicService {
 		if(opt.isPresent())
 		{
 			Topic old = opt.get();
-			Set<Widget> widgets = old.getWidgets();
-			widgets.clear();
-			widgets.addAll(topic.getWidgets() != null ? topic.getWidgets() : new HashSet());
 			topic.setId(old.getId());
-			topic.setWidgets(widgets);
-			return topicRepo.save(topic);
+			
+			Set<Topic> topics = old.getLesson().getTopics().stream().map(t -> {
+				return (t.getId().equals(topicId) ? topic : t);
+			}).collect(Collectors.toSet());
+			
+			old.getLesson().getTopics().clear();
+			old.getLesson().getTopics().addAll(topics);
+			topic.setLesson(old.getLesson());
+			
+			topic.setWidgets(old.getWidgets());
+			lessonRepo.save(topic.getLesson());
+			
+			return findTopicById(topic.getId());
 		}
 		else 
 			return null;
