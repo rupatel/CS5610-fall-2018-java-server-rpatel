@@ -1,7 +1,6 @@
 package com.neu.cs5610.fall18.course.manager.services;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -26,24 +25,28 @@ import com.neu.cs5610.fall18.course.manager.repositories.LessonRepository;
 public class LessonService {
 	@Autowired
 	private ModuleService moduleService;
+	@Autowired
 	private LessonRepository lessonRepo;
-	@PostMapping(" /api/module/{moduleId}/lesson")
+	@PostMapping("/api/module/{moduleId}/lesson")
 	public Lesson createLesson(@PathVariable("moduleId") Long moduleId, 
 								@RequestBody Lesson lesson) {
-			
 		Module m = moduleService.findModuleById(moduleId);
-		if(m!=null)
+		if(m==null) return null;
+		if(lesson.getTopics() != null)
 		{
-			lesson.setModule(m);
-			return lessonRepo.save(lesson); 
+			for(Topic t : lesson.getTopics())
+				lesson.addToTopics(t);
 		}
-		return null;
+		
+		lesson.setModule(m);
+		m.addToLessons(lesson);
+		return lessonRepo.save(lesson);
 	}
 	
 	@GetMapping("/api/module/{mid}/lesson")
 	public List<Lesson> findAllLesson(@PathVariable("mid") Long mid){
 		Module c = moduleService.findModuleById(mid);
-		return new ArrayList(c.getLessons());
+		return new ArrayList<Lesson>(c.getLessons());
 	}
 	
 	@GetMapping("/api/lesson/{lessonId}")
@@ -63,7 +66,8 @@ public class LessonService {
 			Lesson old = opt.get();
 			Set<Topic> topics = old.getTopics();
 			topics.clear();
-			topics.addAll(lesson.getTopics() != null ? lesson.getTopics() : new HashSet());
+			if(lesson.getTopics() != null)
+				topics.addAll(lesson.getTopics());
 			lesson.setId(old.getId());
 			lesson.setTopics(topics);
 			return lessonRepo.save(lesson);

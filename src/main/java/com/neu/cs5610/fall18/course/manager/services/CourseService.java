@@ -1,9 +1,7 @@
 package com.neu.cs5610.fall18.course.manager.services;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
@@ -20,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.neu.cs5610.fall18.course.manager.entities.Course;
 import com.neu.cs5610.fall18.course.manager.entities.Faculty;
 import com.neu.cs5610.fall18.course.manager.entities.Module;
-import com.neu.cs5610.fall18.course.manager.entities.Section;
 import com.neu.cs5610.fall18.course.manager.repositories.CourseRepository;
 
 @Service
@@ -61,16 +58,8 @@ public class CourseService {
 		if(opt.isPresent())
 		{
 			Course old = opt.get();
-			Set<Module> modules = old.getModules();
-			modules.clear();
-			if(course.getModules() != null)
-				modules.addAll(course.getModules());
-			Set<Section> sections = old.getSections();
-			sections.clear();
-			if(course.getSections() != null)
-				sections.addAll(course.getSections());			
-			course.setModules(modules);
-			course.setSections(sections);
+			course.setModules(old.getModules());
+			course.setSections(old.getSections());
 			course.setId(old.getId());
 			return courseRepo.save(course);
 		}

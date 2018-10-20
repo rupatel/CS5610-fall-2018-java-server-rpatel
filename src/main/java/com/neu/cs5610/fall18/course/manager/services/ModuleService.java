@@ -1,10 +1,10 @@
 package com.neu.cs5610.fall18.course.manager.services;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.neu.cs5610.fall18.course.manager.entities.Course;
 import com.neu.cs5610.fall18.course.manager.entities.Lesson;
 import com.neu.cs5610.fall18.course.manager.entities.Module;
+import com.neu.cs5610.fall18.course.manager.repositories.CourseRepository;
 import com.neu.cs5610.fall18.course.manager.repositories.ModuleRepository;
 
 @Service
@@ -26,24 +27,33 @@ import com.neu.cs5610.fall18.course.manager.repositories.ModuleRepository;
 public class ModuleService {
 	@Autowired
 	private CourseService courseService;
+	@Autowired
 	private ModuleRepository moduleRepo;
-	@PostMapping(" /api/course/{courseId}/module")
+	@Autowired
+	private CourseRepository courseRepo;
+	@PostMapping("/api/course/{courseId}/module")
 	public Module createModule(@PathVariable("courseId") Long courseId, 
 								@RequestBody Module module) {
 			
 		Course c = courseService.findCourseById(courseId);
-		if(c!=null)
+		if(c==null) return null;
+		if(module.getLessons() != null)
 		{
-			module.setCourse(c);
-			return moduleRepo.save(module); 
+			for(Lesson l : module.getLessons())
+				module.addToLessons(l);
 		}
-		return null;
+		
+		module.setCourse(c);
+		c.addToModules(module);
+		return moduleRepo.save(module);
 	}
 	
-	@GetMapping("/api/course/{ci}/module")
+	@GetMapping("/api/course/{cid}/module")
 	public List<Module> findAllModule(@PathVariable("cid") Long cid){
 		Course c = courseService.findCourseById(cid);
-		return new ArrayList(c.getModules());
+		if(c!=null)
+			return new ArrayList<Module>(c.getModules());
+		return null;
 	}
 	
 	@GetMapping("/api/module/{moduleId}")
@@ -61,12 +71,20 @@ public class ModuleService {
 		if(opt.isPresent())
 		{
 			Module old = opt.get();
-			Set<Lesson> lessons = old.getLessons();
-			lessons.clear();
-			lessons.addAll(module.getLessons() != null ? module.getLessons() : new HashSet());
 			module.setId(old.getId());
-			module.setLessons(lessons);
-			return moduleRepo.save(module);
+			module.setLessons(old.getLessons());
+		
+			Set<Module> modules = old.getCourse().getModules().stream().map(m -> {
+				return (m.getId().equals(moduleId) ? module : m);
+			}).collect(Collectors.toSet());
+			
+			old.getCourse().getModules().clear();
+			old.getCourse().getModules().addAll(modules);
+			module.setCourse(old.getCourse());
+			
+			courseRepo.save(module.getCourse());
+			
+			return findModuleById(module.getId());
 		}
 		else 
 			return null;

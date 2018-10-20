@@ -17,20 +17,19 @@ import org.springframework.web.bind.annotation.RestController;
 import com.neu.cs5610.fall18.course.manager.entities.Faculty;
 import com.neu.cs5610.fall18.course.manager.entities.User;
 import com.neu.cs5610.fall18.course.manager.repositories.FacultyRepository;
+import com.neu.cs5610.fall18.course.manager.repositories.UserBaseRepository;
 import com.neu.cs5610.fall18.course.manager.repositories.UserRepository;
 
 @Service
 @RestController
 public class UserService {
 	@Autowired
-	private FacultyRepository facultyRepo;
-	@Autowired
 	private UserRepository userRepo;
 	@PostMapping("/api/register")
-	public User register(@RequestBody Faculty faculty,HttpSession session) {
-		session.setAttribute("currentUser", faculty);
-		facultyRepo.save(faculty);
-		return faculty;
+	public User register(@RequestBody User user,HttpSession session) {
+		session.setAttribute("currentUser", user);
+		userRepo.save(user);
+		return user;
 	}
 	
 	@GetMapping("/api/profile")
@@ -41,7 +40,7 @@ public class UserService {
 	
 	@PostMapping("/api/login")
 	public User login(@RequestBody User credential, HttpSession session) {
-		User user = facultyRepo.findByuserName(credential.getUserName());
+		User user = userRepo.findByuserName(credential.getUserName());
 		if(user!= null && user.getPassword().equals(credential.getPassword()))
 		{
 			session.setAttribute("currentUser", user);
