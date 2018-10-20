@@ -63,12 +63,15 @@ public class CourseService {
 			Course old = opt.get();
 			Set<Module> modules = old.getModules();
 			modules.clear();
-			modules.addAll(course.getModules() != null ? course.getModules() : new HashSet());
+			if(course.getModules() != null)
+				modules.addAll(course.getModules());
 			Set<Section> sections = old.getSections();
-			sections.addAll(course.getSections() != null ? course.getSections() : new HashSet());			
-			course.setId(old.getId());
+			sections.clear();
+			if(course.getSections() != null)
+				sections.addAll(course.getSections());			
 			course.setModules(modules);
 			course.setSections(sections);
+			course.setId(old.getId());
 			return courseRepo.save(course);
 		}
 		else 
