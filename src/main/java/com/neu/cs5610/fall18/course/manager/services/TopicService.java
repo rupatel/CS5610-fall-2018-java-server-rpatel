@@ -28,9 +28,9 @@ import com.neu.cs5610.fall18.course.manager.repositories.TopicRepository;
 public class TopicService {
 	@Autowired
 	private LessonService lessonService;
+	@Autowired
 	private TopicRepository topicRepo;
-	private LessonRepository lessonRepo;
-	@PostMapping(" /api/lesson/{lessonId}/topic")
+	@PostMapping("/api/lesson/{lessonId}/topic")
 	public Topic createTopic(@PathVariable("lessonId") Long lessonId, 
 								@RequestBody Topic topic) {
 			
@@ -72,19 +72,14 @@ public class TopicService {
 		{
 			Topic old = opt.get();
 			topic.setId(old.getId());
-			
-			Set<Topic> topics = old.getLesson().getTopics().stream().map(t -> {
-				return (t.getId().equals(topicId) ? topic : t);
-			}).collect(Collectors.toSet());
-			
-			old.getLesson().getTopics().clear();
-			old.getLesson().getTopics().addAll(topics);
 			topic.setLesson(old.getLesson());
-			
 			topic.setWidgets(old.getWidgets());
-			lessonRepo.save(topic.getLesson());
+			Topic updatedTopic = topicRepo.save(topic);
 			
-			return findTopicById(topic.getId());
+			updatedTopic.getLesson().getTopics().remove(old);
+			updatedTopic.getLesson().getTopics().add(updatedTopic);
+			
+			return updatedTopic;
 		}
 		else 
 			return null;

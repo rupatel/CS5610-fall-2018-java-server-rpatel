@@ -29,8 +29,6 @@ public class LessonService {
 	private ModuleService moduleService;
 	@Autowired
 	private LessonRepository lessonRepo;
-	@Autowired
-	private ModuleRepository moduleRepo;
 	@PostMapping("/api/module/{moduleId}/lesson")
 	public Lesson createLesson(@PathVariable("moduleId") Long moduleId, 
 								@RequestBody Lesson lesson) {
@@ -72,19 +70,15 @@ public class LessonService {
 		{
 			Lesson old = opt.get();
 			lesson.setId(old.getId());
-			
-			Set<Lesson> lessons = old.getModule().getLessons().stream().map(l -> {
-				return (l.getId().equals(lessonId) ? lesson : l);
-			}).collect(Collectors.toSet());
-			
-			old.getModule().getLessons().clear();
-			old.getModule().getLessons().addAll(lessons);
 			lesson.setModule(old.getModule());
-			
 			lesson.setTopics(old.getTopics());
-			moduleRepo.save(lesson.getModule());
 			
-			return findLessonById(lesson.getId());
+			Lesson updatedLesson = lessonRepo.save(lesson);
+			
+			updatedLesson.getModule().getLessons().remove(old);
+			updatedLesson.getModule().getLessons().add(updatedLesson);
+			
+			return updatedLesson;
 		}
 		else 
 			return null;
