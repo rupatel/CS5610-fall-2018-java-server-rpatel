@@ -29,4 +29,9 @@ public class Faculty extends User{
 	public void setSections(Set<Section> sections) {
 		this.sections = sections;
 	}
+	
+	public void addToCourses(Course c) {
+		c.setFaculty(this);
+		this.courses.add(c);
+	}
 }

@@ -49,9 +49,11 @@ public class Lesson {
 	}
 	public void addToTopics(Topic t) {
 		t.setLesson(this);
-		for(Widget w: t.getWidgets()) {
-			w.setTopic(t);
-			t.addToWidgets(w);
+		if(t.getWidgets() != null) {
+			for(Widget w: t.getWidgets()) {
+				w.setTopic(t);
+				t.addToWidgets(w);
+			}
 		}
 		this.getTopics().add(t);
 	}

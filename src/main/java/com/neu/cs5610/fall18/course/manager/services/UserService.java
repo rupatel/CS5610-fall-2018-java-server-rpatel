@@ -39,7 +39,6 @@ public class UserService {
 	}
 	@PutMapping("/api/profile")
 	public User updateProfile(@RequestBody User user,HttpSession session) {
-		session.getAttribute("currentUser");
 		Optional<User> opt = userRepo.findById(user.getId());
 		if(!opt.isPresent())
 			return null;

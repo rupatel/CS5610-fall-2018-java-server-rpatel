@@ -38,13 +38,6 @@ public class TopicService {
 			
 		Lesson l = lessonService.findLessonById(lessonId);
 		if(l==null) return null;
-		if(topic.getWidgets() != null)
-		{
-			for(Widget w : topic.getWidgets())
-				topic.addToWidgets(w);
-		}
-		
-		topic.setLesson(l);
 		l.addToTopics(topic);
 		return topicRepo.save(topic);
 	}

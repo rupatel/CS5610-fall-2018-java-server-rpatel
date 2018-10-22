@@ -61,10 +61,13 @@ public class Course {
 	}
 	public void addToModules(Module m) {
 		m.setCourse(this);
-		for(Lesson l: m.getLessons())
-		{
-			l.setModule(m);
-			m.addToLessons(l);
+		if(m.getLessons() != null)
+		{		
+			for(Lesson l: m.getLessons())
+			{
+				l.setModule(m);
+				m.addToLessons(l);
+			}
 		}
 		this.modules.add(m);
 	}

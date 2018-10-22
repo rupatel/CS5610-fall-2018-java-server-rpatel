@@ -36,16 +36,10 @@ public class ModuleService {
 								@RequestBody Module module) {
 			
 		Course c = courseService.findCourseById(courseId);
-		if(c==null) return null;
-		if(module.getLessons() != null)
-		{
-			for(Lesson l : module.getLessons())
-				module.addToLessons(l);
-		}
-		
 		module.setCourse(c);
-		c.addToModules(module);
-		return moduleRepo.save(module);
+		Module updatedModule =  moduleRepo.save(module);
+		c.addToModules(updatedModule);
+		return updatedModule;
 	}
 	
 	@GetMapping("/api/course/{cid}/module")

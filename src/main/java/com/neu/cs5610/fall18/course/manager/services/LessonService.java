@@ -35,14 +35,6 @@ public class LessonService {
 	public Lesson createLesson(@PathVariable("moduleId") Long moduleId, 
 								@RequestBody Lesson lesson) {
 		Module m = moduleService.findModuleById(moduleId);
-		if(m==null) return null;
-		if(lesson.getTopics() != null)
-		{
-			for(Topic t : lesson.getTopics())
-				lesson.addToTopics(t);
-		}
-		
-		lesson.setModule(m);
 		m.addToLessons(lesson);
 		return lessonRepo.save(lesson);
 	}

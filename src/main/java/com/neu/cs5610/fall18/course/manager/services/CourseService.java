@@ -34,7 +34,7 @@ public class CourseService {
 		{
 			for(Module m : course.getModules())
 				course.addToModules(m);
-		
+			
 			course.setFaculty((Faculty)session.getAttribute("currentUser"));
 		}
 		return courseRepo.save(course);
