@@ -24,7 +24,7 @@ import com.neu.cs5610.fall18.course.manager.repositories.UserRepository;
 
 @Service
 @RestController
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:3000",allowCredentials = "true")
 public class UserService {
 	@Autowired
 	private UserRepository userRepo;
@@ -39,6 +39,7 @@ public class UserService {
 	}
 	@PutMapping("/api/profile")
 	public User updateProfile(@RequestBody User user,HttpSession session) {
+		session.getAttribute("currentUser");
 		Optional<User> opt = userRepo.findById(user.getId());
 		if(!opt.isPresent())
 			return null;

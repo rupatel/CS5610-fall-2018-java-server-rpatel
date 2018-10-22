@@ -23,7 +23,7 @@ import com.neu.cs5610.fall18.course.manager.repositories.CourseRepository;
 
 @Service
 @RestController
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 public class CourseService {
 	@Autowired
 	private CourseRepository courseRepo;
