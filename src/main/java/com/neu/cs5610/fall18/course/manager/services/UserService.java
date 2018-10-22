@@ -8,6 +8,7 @@ import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,12 +23,16 @@ import com.neu.cs5610.fall18.course.manager.repositories.UserRepository;
 
 @Service
 @RestController
+@CrossOrigin(origins = "*")
 public class UserService {
 	@Autowired
 	private UserRepository userRepo;
 	@PostMapping("/api/register")
 	public User register(@RequestBody User user,HttpSession session) {
 		session.setAttribute("currentUser", user);
+		User t = userRepo.findByuserName(user.getUserName());
+		if(t!= null)
+			return null;
 		userRepo.save(user);
 		return user;
 	}

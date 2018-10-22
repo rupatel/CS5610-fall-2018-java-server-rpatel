@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,6 +26,7 @@ import com.neu.cs5610.fall18.course.manager.repositories.TopicRepository;
 
 @Service
 @RestController
+@CrossOrigin(origins = "*")
 public class TopicService {
 	@Autowired
 	private LessonService lessonService;
