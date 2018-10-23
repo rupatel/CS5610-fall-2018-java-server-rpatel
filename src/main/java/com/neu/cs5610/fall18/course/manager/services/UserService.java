@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
-import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,10 +15,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.neu.cs5610.fall18.course.manager.entities.Faculty;
 import com.neu.cs5610.fall18.course.manager.entities.User;
-import com.neu.cs5610.fall18.course.manager.repositories.FacultyRepository;
-import com.neu.cs5610.fall18.course.manager.repositories.UserBaseRepository;
 import com.neu.cs5610.fall18.course.manager.repositories.UserRepository;
 
 @Service

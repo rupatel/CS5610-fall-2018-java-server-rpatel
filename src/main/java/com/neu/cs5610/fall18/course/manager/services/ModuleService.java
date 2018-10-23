@@ -3,8 +3,6 @@ package com.neu.cs5610.fall18.course.manager.services;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,9 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.neu.cs5610.fall18.course.manager.entities.Course;
-import com.neu.cs5610.fall18.course.manager.entities.Lesson;
 import com.neu.cs5610.fall18.course.manager.entities.Module;
-import com.neu.cs5610.fall18.course.manager.repositories.CourseRepository;
 import com.neu.cs5610.fall18.course.manager.repositories.ModuleRepository;
 
 @Service
