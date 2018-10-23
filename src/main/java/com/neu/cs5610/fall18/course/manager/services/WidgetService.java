@@ -3,6 +3,7 @@ package com.neu.cs5610.fall18.course.manager.services;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,9 +16,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.neu.cs5610.fall18.course.manager.entities.Lesson;
 import com.neu.cs5610.fall18.course.manager.entities.Topic;
 import com.neu.cs5610.fall18.course.manager.entities.Widget;
+import com.neu.cs5610.fall18.course.manager.repositories.TopicRepository;
 import com.neu.cs5610.fall18.course.manager.repositories.WidgetRepository;
 
 @Service
@@ -28,6 +29,10 @@ public class WidgetService {
 	private TopicService topicService;
 	@Autowired
 	private WidgetRepository widgetRepo;
+	
+	@Autowired
+	private TopicRepository  topicRepo;
+	
 	@PostMapping("/api/topic/{topicId}/widget")
 	public Widget createTopic(@PathVariable("topicId") Long topicId, 
 								@RequestBody Widget widget) {
@@ -76,6 +81,25 @@ public class WidgetService {
 		else 
 			return null;
 	}
+	
+	@PutMapping("/api/topic/{topicId}/{widgets}")
+	public Set<Widget> saveWidgets(@PathVariable("topicId") Long topicId, @RequestBody List<Widget> widgets) {
+		Topic topic = topicService.findTopicById(topicId);
+		if(topic != null)
+		{
+			topic.getWidgets().clear();
+			for(Widget w: widgets) {
+				topic.addToWidgets(w);
+			}
+			Topic updatedTopic = topicRepo.save(topic);
+			topic.getLesson().getTopics().remove(topic);
+			topic.getLesson().getTopics().add(updatedTopic);
+			return updatedTopic.getWidgets();
+		}
+		else 
+			return null;
+	}
+	
 	
 	@DeleteMapping("/api/widget/{widgetId}")
 	public void deleteCourse(@PathVariable("widgetId") Long widgetId) {
