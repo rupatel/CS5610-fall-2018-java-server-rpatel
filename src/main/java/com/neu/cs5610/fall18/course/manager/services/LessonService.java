@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.neu.cs5610.fall18.course.manager.entities.Course;
 import com.neu.cs5610.fall18.course.manager.entities.Lesson;
 import com.neu.cs5610.fall18.course.manager.entities.Module;
 import com.neu.cs5610.fall18.course.manager.entities.Topic;
@@ -34,9 +35,12 @@ public class LessonService {
 	@PostMapping("/api/module/{moduleId}/lesson")
 	public Lesson createLesson(@PathVariable("moduleId") Long moduleId, 
 								@RequestBody Lesson lesson) {
+		
 		Module m = moduleService.findModuleById(moduleId);
-		m.addToLessons(lesson);
-		return lessonRepo.save(lesson);
+		lesson.setModule(m);
+		Lesson updatedLesson =  lessonRepo.save(lesson);
+		m.addToLessons(updatedLesson);
+		return updatedLesson;
 	}
 	
 	@GetMapping("/api/module/{mid}/lesson")

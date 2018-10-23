@@ -38,8 +38,10 @@ public class TopicService {
 			
 		Lesson l = lessonService.findLessonById(lessonId);
 		if(l==null) return null;
-		l.addToTopics(topic);
-		return topicRepo.save(topic);
+		topic.setLesson(l);
+		Topic updatedTopic = topicRepo.save(topic);
+		l.addToTopics(updatedTopic);
+		return updatedTopic;
 	}
 	
 	@GetMapping("/api/lesson/{lessonId}/topic")
