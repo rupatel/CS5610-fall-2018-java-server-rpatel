@@ -1,7 +1,5 @@
 package com.neu.cs5610.fall18.course.manager.entities;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
