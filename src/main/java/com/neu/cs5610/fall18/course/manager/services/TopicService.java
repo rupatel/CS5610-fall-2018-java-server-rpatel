@@ -78,7 +78,7 @@ public class TopicService {
 	}
 	
 	@DeleteMapping("/api/topic/{topicId}")
-	public void deleteCourse(@PathVariable("topicId") Long topicId) {
+	public void deleteTopic(@PathVariable("topicId") Long topicId) {
 		if(topicRepo.existsById(topicId))
 			topicRepo.deleteById(topicId);
 	}
