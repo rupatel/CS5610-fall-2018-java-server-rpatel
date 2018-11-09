@@ -21,7 +21,7 @@ import com.neu.cs5610.fall18.course.manager.repositories.LessonRepository;
 
 @Service
 @RestController
-@CrossOrigin(origins = "https://whiteboard-fall-2018-rutul.herokuapp.com", allowCredentials = "true")
+@CrossOrigin(origins = "https://a5-submission.herokuapp.com", allowCredentials = "true")
 public class LessonService {
 	@Autowired
 	private ModuleService moduleService;
