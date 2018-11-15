@@ -23,7 +23,7 @@ import com.neu.cs5610.fall18.course.manager.repositories.WidgetRepository;
 
 @Service
 @RestController
-@CrossOrigin(origins = "https://a5-submission.herokuapp.com", allowCredentials = "true")
+@CrossOrigin(origins = "http://localhost", allowCredentials = "true")
 public class WidgetService {
 	@Autowired
 	private TopicService topicService;
@@ -45,8 +45,14 @@ public class WidgetService {
 		return updatedWidget;
 	}
 	
+	
+	@GetMapping("/api/widget")
+	public List<Widget> findAllWidget(){
+		return (List<Widget>) widgetRepo.findAll();
+	}
+	
 	@GetMapping("/api/topic/{topicId}/widget")
-	public List<Widget> findAllWidget(@PathVariable("topicId") Long topicId){
+	public List<Widget> findAllWidgetForTopic(@PathVariable("topicId") Long topicId){
 		Topic t = topicService.findTopicById(topicId);
 		if(t != null)
 			return new ArrayList<Widget>(t.getWidgets());

@@ -21,7 +21,7 @@ import com.neu.cs5610.fall18.course.manager.repositories.TopicRepository;
 
 @Service
 @RestController
-@CrossOrigin(origins = "https://a5-submission.herokuapp.com", allowCredentials = "true")
+@CrossOrigin(origins = "http://localhost", allowCredentials = "true")
 public class TopicService {
 	@Autowired
 	private LessonService lessonService;
@@ -39,8 +39,13 @@ public class TopicService {
 		return updatedTopic;
 	}
 	
+	@GetMapping("/api/topic")
+	public List<Topic> findAllTopics(){
+		return (List<Topic>) topicRepo.findAll();
+	}
+	
 	@GetMapping("/api/lesson/{lessonId}/topic")
-	public List<Topic> findAllTopic(@PathVariable("lessonId") Long lessonId){
+	public List<Topic> findAllTopicsForLesson(@PathVariable("lessonId") Long lessonId){
 		Lesson l = lessonService.findLessonById(lessonId);
 		if(l != null)
 			return new ArrayList<Topic>(l.getTopics());

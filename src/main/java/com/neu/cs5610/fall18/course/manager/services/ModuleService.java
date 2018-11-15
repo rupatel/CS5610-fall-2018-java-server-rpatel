@@ -21,7 +21,7 @@ import com.neu.cs5610.fall18.course.manager.repositories.ModuleRepository;
 
 @Service
 @RestController
-@CrossOrigin(origins = "https://a5-submission.herokuapp.com", allowCredentials = "true")
+@CrossOrigin(origins = "http://localhost", allowCredentials = "true")
 public class ModuleService {
 	@Autowired
 	private CourseService courseService;
@@ -38,8 +38,13 @@ public class ModuleService {
 		return updatedModule;
 	}
 	
+	@GetMapping("/api/module")
+	public List<Module> findAllModules(){
+		return (List<Module>) moduleRepo.findAll();
+	}
+	
 	@GetMapping("/api/course/{cid}/module")
-	public List<Module> findAllModule(@PathVariable("cid") Long cid){
+	public List<Module> findModulesForCourse(@PathVariable("cid") Long cid){
 		Course c = courseService.findCourseById(cid);
 		if(c!=null)
 			return new ArrayList<Module>(c.getModules());

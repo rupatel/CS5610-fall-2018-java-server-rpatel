@@ -21,7 +21,7 @@ import com.neu.cs5610.fall18.course.manager.repositories.LessonRepository;
 
 @Service
 @RestController
-@CrossOrigin(origins = "https://a5-submission.herokuapp.com", allowCredentials = "true")
+@CrossOrigin(origins = "http://localhost", allowCredentials = "true")
 public class LessonService {
 	@Autowired
 	private ModuleService moduleService;
@@ -38,8 +38,13 @@ public class LessonService {
 		return updatedLesson;
 	}
 	
+	@GetMapping("/api/lesson")
+	public List<Lesson> findAllLessons(Long mid){
+		return (List<Lesson>) lessonRepo.findAll();
+	}
+	
 	@GetMapping("/api/module/{mid}/lesson")
-	public List<Lesson> findAllLesson(@PathVariable("mid") Long mid){
+	public List<Lesson> findAllLessonForModule(@PathVariable("mid") Long mid){
 		Module m = moduleService.findModuleById(mid);
 		if(m!=null)
 			return new ArrayList<Lesson>(m.getLessons());

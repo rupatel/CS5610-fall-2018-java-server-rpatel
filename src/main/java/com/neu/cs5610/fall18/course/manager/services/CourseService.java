@@ -23,7 +23,7 @@ import com.neu.cs5610.fall18.course.manager.repositories.CourseRepository;
 
 @Service
 @RestController
-@CrossOrigin(origins = "https://a5-submission.herokuapp.com", allowCredentials = "true")
+@CrossOrigin(origins = "http://localhost", allowCredentials = "true")
 public class CourseService {
 	@Autowired
 	private CourseRepository courseRepo;
