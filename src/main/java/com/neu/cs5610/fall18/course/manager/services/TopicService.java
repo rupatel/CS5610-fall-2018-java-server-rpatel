@@ -21,7 +21,7 @@ import com.neu.cs5610.fall18.course.manager.repositories.TopicRepository;
 
 @Service
 @RestController
-@CrossOrigin(origins = "https://whiteboard-assignment5.herokuapp.com", allowCredentials = "true")
+@CrossOrigin(origins = "https://a7submission.herokuapp.com", allowCredentials = "true")
 public class TopicService {
 	@Autowired
 	private LessonService lessonService;
@@ -78,7 +78,7 @@ public class TopicService {
 	}
 	
 	@DeleteMapping("/api/topic/{topicId}")
-	public void deleteTopic(@PathVariable("topicId") Long topicId) {
+	public void deleteCourse(@PathVariable("topicId") Long topicId) {
 		if(topicRepo.existsById(topicId))
 			topicRepo.deleteById(topicId);
 	}

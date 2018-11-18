@@ -23,7 +23,7 @@ import com.neu.cs5610.fall18.course.manager.repositories.WidgetRepository;
 
 @Service
 @RestController
-@CrossOrigin(origins = "https://whiteboard-assignment5.herokuapp.com", allowCredentials = "true")
+@CrossOrigin(origins = "https://a7submission.herokuapp.com", allowCredentials = "true")
 public class WidgetService {
 	@Autowired
 	private TopicService topicService;
@@ -34,7 +34,7 @@ public class WidgetService {
 	private TopicRepository  topicRepo;
 	
 	@PostMapping("/api/topic/{topicId}/widget")
-	public Widget createWidget(@PathVariable("topicId") Long topicId, 
+	public Widget createTopic(@PathVariable("topicId") Long topicId, 
 								@RequestBody Widget widget) {
 			
 		Topic t = topicService.findTopicById(topicId);
@@ -46,7 +46,7 @@ public class WidgetService {
 	}
 	
 	@GetMapping("/api/topic/{topicId}/widget")
-	public List<Widget> findAllWidget(@PathVariable("topicId") Long topicId){
+	public List<Widget> findAllWidgetForTopic(@PathVariable("topicId") Long topicId){
 		Topic t = topicService.findTopicById(topicId);
 		if(t != null)
 			return new ArrayList<Widget>(t.getWidgets());
@@ -55,7 +55,7 @@ public class WidgetService {
 	}
 	
 	@GetMapping("/api/widget/{widgetId}")
-	public Widget findWidgetById(@PathVariable("widgetId") Long widgetId) {
+	public Widget findTopicById(@PathVariable("widgetId") Long widgetId) {
 		Optional<Widget> opt = widgetRepo.findById(widgetId);
 		if(opt.isPresent())
 			return opt.get();
@@ -64,7 +64,7 @@ public class WidgetService {
 	}
 	
 	@PutMapping("/api/widget/{widgetId}")
-	public Widget updateWidget(@PathVariable("widgetId") Long widgetId, @RequestBody Widget widget) {
+	public Widget updateTopic(@PathVariable("widgetId") Long widgetId, @RequestBody Widget widget) {
 		Optional<Widget> opt = widgetRepo.findById(widgetId);
 		if(opt.isPresent())
 		{
@@ -102,7 +102,7 @@ public class WidgetService {
 	
 	
 	@DeleteMapping("/api/widget/{widgetId}")
-	public void deleteWidget(@PathVariable("widgetId") Long widgetId) {
+	public void deleteCourse(@PathVariable("widgetId") Long widgetId) {
 		if(widgetRepo.existsById(widgetId))
 			widgetRepo.deleteById(widgetId);
 	}
