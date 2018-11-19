@@ -21,7 +21,7 @@ import com.neu.cs5610.fall18.course.manager.repositories.ImageWidgetRepository;
 
 @Service
 @RestController
-@CrossOrigin(origins = "https://whiteboard-assignment5.herokuapp.com", allowCredentials = "true")
+@CrossOrigin(origins = "https://a7submissionv2.herokuapp.com", allowCredentials = "true")
 public class ImageWidgetService {
 	@Autowired
 	private TopicService topicService;
